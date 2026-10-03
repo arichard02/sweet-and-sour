@@ -1,14 +1,31 @@
 import { useState } from "react";
 
-function JournalForm() {
+function JournalForm({ onAddEntry }) {
   const [entryType, setEntryType] = useState("");
   const [entryText, setEntryText] = useState("");
 
+  function handleSubmit(event) {
+  event.preventDefault();
+
+  if (!entryType || !entryText.trim()) {
+    return;
+  }
+
+  const newEntry = {
+    id: Date.now(),
+    type: entryType,
+    text: entryText.trim(),
+  };
+
+  onAddEntry(newEntry);
+}
+
   return (
+  
     <section>
       {" "}
       <h2>How was your day?</h2>{" "}
-      <form>
+      <form onSubmit={handleSubmit}>
         {" "}
         <div>
           {" "}
@@ -43,7 +60,7 @@ function JournalForm() {
             onChange={(event) => setEntryText(event.target.value)}
           ></textarea>
         </div>{" "}
-        <button type="submit">Add Entry</button>{" "}
+        <button type="submit">Add Entry</button>
       </form>{" "}
     </section>
   );
