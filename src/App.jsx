@@ -1,14 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import JournalForm from "./components/JournalForm";
 import JournalList from "./components/JournalList";
 
 function App() {
-  const [journalEntries, setJournalEntries] = useState([]);
+  const [journalEntries, setJournalEntries] = useState(() => {
+    const savedEntries = localStorage.getItem("journalEntries");
+
+    return savedEntries ? JSON.parse(savedEntries) : [];
+  });
 
   function handleAddEntry(newEntry) {
     setJournalEntries((currentEntries) => [...currentEntries, newEntry]);
   }
+
+  useEffect(() => {
+    localStorage.setItem("journalEntries", JSON.stringify(journalEntries));
+  }, [journalEntries]);
 
   return (
     <main>
