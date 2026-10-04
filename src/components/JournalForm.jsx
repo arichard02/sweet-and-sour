@@ -18,6 +18,11 @@ function JournalForm({ onAddEntry }) {
   };
 
   onAddEntry(newEntry);
+
+
+  setEntryType("");
+  setEntryText("");
+
 }
 
   return (
