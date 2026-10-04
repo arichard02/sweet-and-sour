@@ -7,6 +7,8 @@ function JournalList({ entries }) {
         <article key={entry.id}>
           <h3>{entry.type === "sweet" ? "🍬 Sweet" : "🍋 Sour"}</h3>
 
+           <p>{entry.date}</p>
+
           <p>{entry.text}</p>
         </article>
       ))}

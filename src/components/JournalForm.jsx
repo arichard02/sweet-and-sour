@@ -5,28 +5,26 @@ function JournalForm({ onAddEntry }) {
   const [entryText, setEntryText] = useState("");
 
   function handleSubmit(event) {
-  event.preventDefault();
+    event.preventDefault();
 
-  if (!entryType || !entryText.trim()) {
-    return;
+    if (!entryType || !entryText.trim()) {
+      return;
+    }
+
+    const newEntry = {
+      id: Date.now(),
+      type: entryType,
+      text: entryText.trim(),
+      date: new Date().toLocaleDateString(),
+    };
+
+    onAddEntry(newEntry);
+
+    setEntryType("");
+    setEntryText("");
   }
 
-  const newEntry = {
-    id: Date.now(),
-    type: entryType,
-    text: entryText.trim(),
-  };
-
-  onAddEntry(newEntry);
-
-
-  setEntryType("");
-  setEntryText("");
-
-}
-
   return (
-  
     <section>
       {" "}
       <h2>How was your day?</h2>{" "}
