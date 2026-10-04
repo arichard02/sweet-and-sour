@@ -1,4 +1,4 @@
-function JournalList({ entries }) {
+function JournalList({ entries, onDeleteEntry }) {
   return (
     <section>
       <h2>My Journal</h2>
@@ -10,6 +10,14 @@ function JournalList({ entries }) {
            <p>{entry.date}</p>
 
           <p>{entry.text}</p>
+
+           <button
+            type="button"
+            onClick={() => onDeleteEntry(entry.id)}
+          >
+            Delete
+          </button>
+          
         </article>
       ))}
     </section>

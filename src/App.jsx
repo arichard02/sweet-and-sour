@@ -10,9 +10,20 @@ function App() {
     return savedEntries ? JSON.parse(savedEntries) : [];
   });
 
-  function handleAddEntry(newEntry) {
-    setJournalEntries((currentEntries) => [...currentEntries, newEntry]);
-  }
+
+function handleAddEntry(newEntry) {
+  setJournalEntries((currentEntries) => [
+    ...currentEntries,
+    newEntry,
+  ]);
+}
+
+function handleDeleteEntry(entryId) {
+  setJournalEntries((currentEntries) =>
+    currentEntries.filter((entry) => entry.id !== entryId)
+  );
+}
+
 
   useEffect(() => {
     localStorage.setItem("journalEntries", JSON.stringify(journalEntries));
@@ -24,7 +35,10 @@ function App() {
 
       <JournalForm onAddEntry={handleAddEntry} />
 
-      <JournalList entries={journalEntries} />
+      <JournalList
+  entries={journalEntries}
+  onDeleteEntry={handleDeleteEntry}
+/>
 
       <p>Number of entries: {journalEntries.length}</p>
     </main>
